@@ -1,0 +1,37 @@
+I got the gslam mapping to work by using the following packages which I tested
+upfront: https://courses.edx.org/courses/course-v1:DelftX+ROS1x+1T2020/courseware/c522275e81dc4c04be2916d98601e3bf/28313344104546849d6cc1611dc393c7/
+
+I created the sock_2dnav package according to this tutorial: https://wiki.ros.org/navigation/Tutorials/RobotSetup
+
+But instead of populating it as they suggest, I copied everything from the
+config folder from the husky_navigation package to the config folder of the
+sock_2dnav. I also copied the gmapping.launch, move_base.launch and
+gmapping_demo.launch file. In the gmapping.launch file I changed the default topic for the
+laserscan to sock/laser/scan instead of just scan and in the
+costmap_common.yaml file I also changed the laser topic to sock/laser/scan. 
+
+Then by running:
+
+roslaunch sock_gazebo sock_gazebo.launch
+
+and
+
+roslaunch sock_2dnav gmapping_demo.launch
+
+It works exactly like in the edx tutorial. 
+
+Next up: 
+I can't give it a 2dnav goal in rviz (this is possible in the husky_navigation
+package). The error is: 
+
+[ERROR] [1581885016.454223351, 336.624000000]: The goal pose passed to this planner must be in the map frame.  It is instead in the base_link frame.
+
+It's not entirely necessary though, since I can also move the robot around in
+RViZ. I could also try to save the map and then follow this tutorial to
+navigate it: https://wiki.ros.org/navigation/Tutorials/RobotSetup. At the
+bottom the tutorial talks about setting up rviz for giving navigation goals. 
+
+First it would be good to put the sock robot in willowgarage, so it has a fixed
+map and I don't need to map it every time. 
+
+
