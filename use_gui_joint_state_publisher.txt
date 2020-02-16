@@ -1,0 +1,24 @@
+After not working on the slam robot for a long time, I wanted to try launching
+it again. I did rosdep update, removed build and devel content, reinitialised
+rosdep by deleting the file that command creates. 
+
+The main isssue tat popped up was: 
+[ WARN] [1581873062.088918257]: The 'state_publisher' executable is deprecated. Please use 'robot_state_publisher' instead
+[ WARN] [1581873062.090446627]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[WARN] [1581873062.358363]: The 'use_gui' parameter was specified, which is deprecated.  We'll attempt to find and run the GUI, but if this fails you should install the 'joint_state_publisher_gui' package instead and run that.  This backwards compatibility option will be removed in Noetic.
+[ERROR] [1581873062.358882]: Could not find the GUI, install the 'joint_state_publisher_gui' package
+[joint_state_publisher-2] process has died [pid 4409, exit code 1, cmd /opt/ros/melodic/lib/joint_state_publisher/joint_state_publisher __name:=joint_state_publisher __log:=/home/beau/.ros/log/4e971d22-50df-11ea-bd01-049226be7f1f/joint_state_publisher-2.log].
+log file: /home/beau/.ros/log/4e971d22-50df-11ea-bd01-049226be7f1f/joint_state_publisher-2*.log
+
+Basically giving me trouble about wanting the GUI for sending Twist msgs to the
+wheels. 
+
+The solution: 
+
+The error was not in my code, but rather logical. I tried to control the wheels
+of the rviz representation by sending twist messages, but there was no node to
+receive those Twist messages and turn them into wheel velocities running.
+Because rviz still needs a robot to connect to! Either a simulated robot or a
+real one, but rviz alone is not enough. 
+
+I realised this after launching my old robot's gazebo package (pre-sock). 
