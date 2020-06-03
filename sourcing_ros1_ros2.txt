@@ -1,0 +1,14 @@
+ros1: 
+
+source /opt/ros/melodic/setup.bash
+source ~/catkin_ws/devel/setup.bash
+
+ros2:
+
+source /opt/ros/dashing/setup.bash
+
+Sourcing the OVERLAY in a new terminal
+Source:https://index.ros.org/doc/ros2/Tutorials/Workspace/Creating-A-Workspace/#source-the-overlay
+
+. install/local_setup.bash
+
